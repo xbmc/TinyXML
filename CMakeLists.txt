@@ -7,10 +7,10 @@ if(MSVC)
 endif()
 
 add_library(tinyxmlSTL STATIC
-  tinystr.h
   tinyxml.h
-  tinystr.cpp
   tinyxml.cpp
+  tinyxmlerror.cpp
+  tinyxmlparser.cpp
 )
 
 target_compile_definitions(tinyxmlSTL
