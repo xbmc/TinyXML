@@ -1,31 +1,34 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(tinyxmlSTL VERSION 2.8.2 LANGUAGES CXX)
+project(tinyXML VERSION 2.8.2 LANGUAGES CXX)
 
 if(MSVC)
     set(CMAKE_DEBUG_POSTFIX "d")
 endif()
 
-add_library(tinyxmlSTL STATIC
+add_library(tinyXML STATIC
   tinyxml.h
   tinyxml.cpp
   tinyxmlerror.cpp
   tinyxmlparser.cpp
 )
 
-target_compile_definitions(tinyxmlSTL
-  PRIVATE TIXML_USE_STL
+target_compile_definitions(tinyXML
+  PRIVATE
+  TIXML_USE_STL
   _CRT_SECURE_NO_DEPRECATE
   _CRT_NONSTDC_NO_DEPRECATE
+  INTERFACE
+  TIXML_USE_STL
 )
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
-  ${CMAKE_CURRENT_BINARY_DIR}/tinyxmlSTL-config-version.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/tinyXML-config-version.cmake
   VERSION ${PROJECT_VERSION}
   COMPATIBILITY AnyNewerVersion
 )
-install(TARGETS tinyxmlSTL EXPORT tinyxmlSTL
+install(TARGETS tinyXML EXPORT tinyXML
   RUNTIME DESTINATION bin
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib)
@@ -34,23 +37,23 @@ install(FILES
   tinyxml.h
   DESTINATION include)
 
-install(EXPORT tinyxmlSTL
+install(EXPORT tinyXML
   FILE
-    tinyxmlSTL.cmake
+    tinyXML.cmake
   NAMESPACE
     tinyxml::
   DESTINATION
-    lib/cmake/tinyxmlSTL
+    lib/cmake/tinyXML
 )
 install(
   FILES
-    cmake/tinyxmlSTL-config.cmake
-    ${CMAKE_CURRENT_BINARY_DIR}/tinyxmlSTL-config-version.cmake
+    cmake/tinyXML-config.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/tinyXML-config-version.cmake
   DESTINATION
-    lib/cmake/tinyxmlSTL
+    lib/cmake/tinyXML
 )
 
-export(TARGETS tinyxmlSTL
-    FILE tinyxmlSTL-config.cmake
+export(TARGETS tinyXML
+    FILE tinyXML-config.cmake
     NAMESPACE tinyxml::
 )
